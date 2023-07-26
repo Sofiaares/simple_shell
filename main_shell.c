@@ -29,7 +29,7 @@ int main(int ac, char **av)
                                 _puts_i(av[0]);
                                 _puts_i(": 0: Can't open ");
                                 _puts_i(av[1]);
-                                _putchar('\n');
+                                _putchar('\n'); 
                                 _putchar(BUF_FLUSH);
                                 exit(127);
                         }
