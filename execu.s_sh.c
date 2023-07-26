@@ -2,7 +2,8 @@
 
 
 /**
- * execute_process_i - it creates a source process it passed the command which execute in
+ * execute_process_i - it creates a source process it passed the command which
+ * execute in
  * @vargs: an array that contains command and all arguments
  * @envy: variables
  * Return: same thing as exec_ve.

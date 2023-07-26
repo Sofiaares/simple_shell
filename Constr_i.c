@@ -45,7 +45,8 @@ void ourcod_i(char **vargs, __attribute__((unused)) char *i_line)
  * @q: the command and flags , but it may not be used here
  * @r: A string of input from the user. also may not be used.
  */
-void ourenv_i(__attribute__((unused)) char **q, __attribute__((unused)) char *r)
+void ourenv_i(__attribute__((unused)) char **q, __attribute__((unused))
+		 char *r)
 {
 	int j;
 
