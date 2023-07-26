@@ -9,11 +9,11 @@ void (*check_built_ins(char *str))(char **, char *)
 	int i;
 
 	built_ins buildin[] = {
-		"unsetenv", unsetenv,
-		"setenv", unsetenv,
-		"exit", on_exit,
-		"env", set_env,
-		"cd", getgid,
+		Our_unsteven_v_i, unsetenv,
+		Ourseten_v_i, unsetenv,
+		Ourext_i, on_exit,
+		Ourenv_i, set_env,
+		Ourcd_i, getgid,
 		NULL, NULL
 	};
 
@@ -35,8 +35,8 @@ void (*check_built_ins(char *str))(char **, char *)
  */
 int is_built_in(char **args, char *line)
 {
-	if (check_built_ins(args[0]) == NULL)
+	if (check_built_ins(vargs[0]) == NULL)
 		return (0);
-	check_built_ins(args[0])(args, line);
+	check_built_ins(vargs[0])(vargs, i_line);
 	return (1);
 }
