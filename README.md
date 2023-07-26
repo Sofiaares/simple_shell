@@ -1,3 +1,0 @@
-Simple shell project 
--SOFIA ARESMOUK
--MUSTAPHA ABAAKILI
