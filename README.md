@@ -1,1 +1,3 @@
-Simple shell project Sofia/Mustapha
+Simple shell project 
+-SOFIA ARESMOUK
+-MUSTAPHA ABAAKILI
