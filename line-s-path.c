@@ -11,7 +11,7 @@ char *search_full_path(char *command)
 	char **path_tkens;
 	int j = 0, var_i;
 
-	var_i = path_index_finder("PATH");
+	var_i = find_path_index("PATH");
 	if (var_i == -1)
 		return (NULL);
 	path_tkens = parse_path(var_i, "PATH");
@@ -23,18 +23,18 @@ char *search_full_path(char *command)
 		full_p_i = (build_full_path(path_tkens[j], command));
 		if (!full_p_i)
 		{
-			free_arri(path_tkens);
+			free_i(path_tkens);
 			return (NULL);
 		}
-		if (access(full_p_i, X_OK_X) == 0)
+		if (access(full_p_i, X_OK) == 0)
 		{
-			free_arri(path_tkens);
+			free_i(path_tkens);
 			return (full_p_i);
 		}
-		free_i(full_p_i);
-		i++;
+		free_i(char *full_p_i);
+		j++;
 	}
-	free_arri(path_tkens);
+	free_i(path_tkens);
 	return (NULL);
 }
 
@@ -47,14 +47,14 @@ char *search_full_path(char *command)
  */
 char **parse_path(int index, char *vstr)
 {
-	char *en_var; /*get_env("PATH");*/
+	char *env_var; /*get_env("PATH");*/
 	char **path_tkens;
 	int rlen;
 	const char *dylmtr = ":";
 
 	rlen = _strlen_i(vstr);
-	en_var = environ[index] + (rlen + 1);
-	path_tokens = parse_line(env_var, dylmtr);
+	env_var = envi[index] + (rlen + 1);
+	path_tkens = parse_path(env_var, dylmtr);
 	if (path_tkens == NULL)
 		return (NULL);
 	return (path_tkens);
@@ -75,8 +75,8 @@ char *build_full_path(char *ypath, char *command_i)
 	if (ypath == NULL || command_i == NULL)
 		return (NULL);
 	path_rlen_i = _strlen_i(ypath);
-	command_len = _strlen_i(command_i);
-	len = path_rlen_i + command_ren + 2;
+	command_ren = _strlen_i(command_i);
+	rlen = path_rlen_i + command_ren + 2;
 
 	built = malloc(sizeof(char) * rlen);
 	if (built == NULL)
@@ -100,11 +100,11 @@ int path_index_finder(char *envy)
 	int x;
 
 	rlen = _strlen_i(envy);
-	for (i = 0; environ[j] != NULL; j++)
+	for (j = 0; environ[j] != NULL; j++)
 	{
-		for (x = 0; x < len; x++)
+		for (x = 0; x < rlen; x++)
 		{
-			if (environ[j][x] != envy[x])
+			if (envi[j][x] != envy[x])
 				break;
 		}
 		if (x == rlen && environ[j][x] == '=')

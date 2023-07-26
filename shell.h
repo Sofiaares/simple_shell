@@ -67,7 +67,7 @@ int _strcmps_i(char *sx, char *sv);
 int _putchar(char c);
 int _strlen_i(char *q);
 void _puts_i(char *q);
-void free_i(char *arr[]);
+void free_i(char **arr[]);
 void print_num_i(int n);
 char *_str_cat_i(char *vest, char *src_v);
 char *_str_copy_i(char *vest, char *src_v);

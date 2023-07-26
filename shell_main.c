@@ -12,10 +12,10 @@ int main(__attribute__((unused)) int vargc, char *cargv[], char *envy[])
 	signal(SIGINT, SIG_IGN);
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		interac_tive_i(cargv, envy);
+		interactive(cargv, envy);
 	}
 	else
-		batch(vargv, envy);
+		batch(cargv, envy);
 	return (0);
 }
 
@@ -37,28 +37,28 @@ void interac_tive_i(char *cargv[], char *envy[])
 		i_line = you_readline_i(), vargs = prase_yline_i(i_line, DLMT);
 		if (!vargs[0])
 		{
-			free_i(i_line), free_arri(vargs);
+			free_i(char *i_line), free_i(char *vargs);
 			continue;
 		}
 		else if (!is_built_in(vargs, i_line))
 		{
 			cmd_full_path = search_full_path(vargs[0]);
-			if (cmd_full_path || (stat(vargs[0], &statbxf) == 0))
+			if (cmd_full_path || (stat(vargs[0], &statbuf) == 0))
 			{
 				if (cmd_full_path)
 				{
 					vargs[0] = _strd_up_i(cmd_full_path);
-					free_i(cmd_full_path);
+					free_i(char *cmd_full_path);
 				}
-				create_process(vargs, envy);
+				execute_process_i(vargs, envy);
 			}
 			else
 				error_handl_i(vargv, vargs, cmd_counter_i);
-			free_i(i_line), free_arri(vargs), cmd_counter_i++;
+			free_i(char *i_line), free_arri(vargs), cmd_counter_i++;
 		}
 		else
 		{
-			free_i(i_line), free_arri(vargs);
+			free_i(char *i_line), free_arri(vargs);
 		}
 	}
 }
@@ -79,7 +79,7 @@ void batch(char *cargv[], char *envy[])
 	vargs = prase_yline_i(i_line, DLMT);
 	if (!vargs[0])
 	{
-		free_i(i_line);
+		free_i(char *i_line);
 		free_arri(vargs);
 	}
 	else if (!is_built_in(vargs, i_line))
@@ -90,21 +90,21 @@ void batch(char *cargv[], char *envy[])
 		{
 			if (cmd_full_path)
 			{
-				free_i(args[0]);
-				args[0] = _strd_up_i(cmd_full_path);
-				free_i(cmd_full_path);
+				free_i(vargs[0]);
+				vargs[0] = _strd_up_i(cmd_full_path);
+				free_i(char *cmd_full_path);
 			}
-		create_process(args, env);
+		execute_process_i(args, envy);
 		}
 		else
 			error_handl_i(cargv, vargs, cmd_counter_i);
-		free_i(i_line);
+		free_i(char *i_line);
 		free_arri(vargs);
 		cmd_counter_i++;
 	}
 	else
 	{
-		free_i(i_line);
+		free_i(char *i_line);
 		free_arri(vargs);
 	}
 }

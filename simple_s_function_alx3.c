@@ -24,7 +24,7 @@ void set_env(char *yname, char *xvalue_i)
 {
 	int index_n;
 	char *vstr;
-	char **en_vp = environ;
+	char **en_vp = envi;
 	int name_rlen, value_rlen, rlen;
 
 	if (!yname || !xvalue_i)
@@ -32,9 +32,9 @@ void set_env(char *yname, char *xvalue_i)
 		perror("setenv()");
 		return;
 	}
-	name_len = _strlen_i(yname);
-	value_len = _strlen_i(xvalue_i);
-	len = name_rlen + value_rlen + 2;
+	name_rlen = _strlen_i(yname);
+	value_rlen = _strlen_i(xvalue_i);
+	rlen = name_rlen + value_rlen + 2;
 
 	vstr = malloc(rlen * sizeof(char));
 	if (!vstr)
@@ -43,7 +43,7 @@ void set_env(char *yname, char *xvalue_i)
 		return;
 	}
 	_str_copy_i(vstr, yname), _str_cat_i(vstr, "="), _str_cat_i(vstr, xvalue_i);
-	index = path_index_finder(yname);
+	index = find_path_index(yname);
 	if (index_n != -1)
 		environ[index_n] = vstr;
 	else
@@ -64,11 +64,11 @@ void set_env(char *yname, char *xvalue_i)
 
 int _atoi(char *s)
 {
-	int ix, di, nx, rlen, g, digit_i;
+	int ix, di, qx, rlen, g, digit_i;
 
 	ix = 0;
 	di = 0;
-	nx = 0;
+	qx = 0;
 	rlen = 0;
 	g = 0;
 	digit_i = 0;
@@ -86,7 +86,7 @@ int _atoi(char *s)
 			digit_i = s[ix] - '0';
 			if (di % 2)
 				digit_i = -digit_i;
-			n = n * 10 + digit_i;
+			q = q * 10 + digit_i;
 			g = 1;
 			if (s[ix + 1] < '0' || s[ix + 1] > '9')
 				break;
@@ -97,7 +97,7 @@ int _atoi(char *s)
 	if (g == 0)
 		return (0);
 
-	return (n);
+	return (q);
 }
 
 /**

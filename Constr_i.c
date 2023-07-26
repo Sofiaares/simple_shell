@@ -17,27 +17,27 @@ void ourcod_i(char **vargs, __attribute__((unused)) char *i_line)
 
 	if (vargs[1] == NULL)
 	{
-		index = path_index_finder("HOME");
-		ch_dir_i((envi_mntal[index]) + 5);
+		index = find_path_index("HOME");
+		chdir((envi_mntal[index]) + 5);
 	}
 	else if (_strcmps_i(vargs[1], "-") == 0)
 	{
-		index = path_index_finder("OLDPxD");
+		index = find_path_index("OLDPxD");
 		if (index != -1)
-			ch_dir_i((envi_mntal[index]) + 7);
+			chdir((envi_mntal[index]) + 7);
 		else
 			perror("cd: ");
 	}
 	else
 	{
-		if (ch_dir_i(vargs[1]) == -1)
+		if (chdir(vargs[1]) == -1)
 		{
 			perror("error: ");
 		}
 	}
 	set_env("OLDPxD", pxd);
-	free_i(bux);
-	free_i(pxd);
+	free_i(char *bux);
+	free_i(char *pxd);
 }
 
 /**
@@ -58,31 +58,31 @@ void ourenv_i(__attribute__((unused)) char **q, __attribute__((unused))
 }
 
 /**
- * ourext_i - it exit shell. After frees allocs.
+ * ourext_i - it exit shell After frees allocs.
  * @vargs: the command and all flags
  * @i_line: A string of the input.
  */
 void ourext_i(char **vargs, char *i_line)
 {
-	int STATUS = exit_success;
+	int STATUS = exit;
 	int j = 0;
 
 	if (vargs[1])
 	{
 		while (vargs[1][j])
 		{
-			if (!_i_sdigit(vargs[1][j]))
+			if (!_isdigit(vargs[1][j]))
 				break;
 			j++;
 		}
 		if (j == _strlen_i(vargs[1]))
-			status = _atoi(vargs[1]);
+			stat = _atoi(vargs[1]);
 	}
 	else
-		STATUS = exit_success;
+		STATUS = exit;
 
-	free_i(i_line);
-	free_arr(vargs);
+	free_i(char *i_line);
+	free_i(char *vargs);
 	exit(STATUS);
 }
 

@@ -17,7 +17,7 @@ void (*check_built_ins(char *vstr))(char **, char *)
 		{NULL, NULL}
 	};
 
-	for (i = 0; build_in[i].built != NULL; j++)
+	for (j = 0; build_in[j].built != NULL; j++)
 	{
 		if (_strcmps_i(vstr, build_in[j].built) == 0)
 		{
