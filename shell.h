@@ -15,12 +15,12 @@
 
 #define DLMT " \t\n"
 
-extern char **envi_mntal;
+extern char **environ;
 
 /**
- * struct built_in - Defines the built_in_t funcs.
- * @built_in_t: The name of the build in command.
- * @f: A pointer to the right built_in funcs.
+ * struct builtin_d - Defines the builtins  functions.
+ * @built: The name of the build in command.
+ * @f: A pointer to the right builtin functions.
  */
 typedef struct built_n
 {

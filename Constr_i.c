@@ -18,13 +18,13 @@ void ourcod_i(char **vargs, __attribute__((unused)) char *i_line)
 	if (vargs[1] == NULL)
 	{
 		index = path_index_finder("HOME");
-		ch_dir_i((envi_mntal[index]) + 5);
+		ch_dir_i((environ[index]) + 5);
 	}
 	else if (_strcmps_i(vargs[1], "-") == 0)
 	{
 		index = path_index_finder("OLDPxD");
 		if (index != -1)
-			ch_dir_i((envi_mntal[index]) + 7);
+			ch_dir_i((environ[index]) + 7);
 		else
 			perror("cd: ");
 	}
@@ -50,9 +50,9 @@ void ourenv_i(__attribute__((unused)) char **q, __attribute__((unused))
 {
 	int j;
 
-	for (j = 0; envi_mntal[j] != NULL; j++)
+	for (j = 0; environ[j] != NULL; j++)
 	{
-		_puts_i(envi_mntal[j]);
+		_puts_i(environ[j]);
 		_puts_i("\n");
 	}
 }
@@ -122,7 +122,7 @@ void our_unseten_v_i(char *vargs[], __attribute__((unused)) char *i_line)
 	index = path_index_finder(name_i);
 	if (index != -1)
 	{
-		envi_mntal[index] = envi_mntal[index + 1];
+		environ[index] = environ[index + 1];
 	}
 	else
 		perror("unseten_v_i() ");
