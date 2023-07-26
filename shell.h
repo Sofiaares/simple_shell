@@ -22,7 +22,7 @@ extern char **envi_mntal;
  * @built_in_t: The name of the build in command.
  * @f: A pointer to the right built_in funcs.
  */
-typedef struct built
+typedef struct built_n
 {
 	char *built_ins;
 	void (*func)(char **, char *);
@@ -35,7 +35,7 @@ void print_commands(char **cmd);
 void error_handl_i(char *vargs[], char *command[], int cmd_counter_i);
 
 /* modes sh-c */
-void batch(char *argv[], char *env[]);
+void batch(char *cargv[], char *envy[]);
 void interac_tive_i(char *cargv[], char *envy[])
 
 /* parsh liner and execu s sh */
@@ -56,9 +56,9 @@ void (*check_built_ins(char *vstr))(char **, char *);
 
 /*line-s-path functions*/
 int path_index_finder(char *envy);
-char *build_full_path(char *path, char *command);
+char *build_full_path(char *ypath, char *command_i);
 char *search_full_path(char *command);
-char **parse_path(int index, char *str);
+char **parse_path(int index, char *vstr);
 
 /* simple s fuctions  */
 void set_env(char *name, char *value);
