@@ -45,7 +45,7 @@ char *search_full_path(char *command)
  * @str: representing the environment variable
  * Return: on success an array of token, on fail NULL is returned
  */
-char **parse_path(int i, char *str)
+char **parse_path(int index, char *str)
 {
 	char *env_var; /*getenv("PATH");*/
 	char **path_tokens;
