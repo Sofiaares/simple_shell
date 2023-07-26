@@ -21,7 +21,7 @@ int main(__attribute__((unused)) int vargc, char *cargv[], char *envy[])
 
 /**
  * interac_tive_i - execute command on the mode interactive.
- * @argv: argument vector
+ * @cargv: argument vector
  * @envy: environ variable.
  */
 void interac_tive_i(char *cargv[], char *envy[])

@@ -16,8 +16,8 @@ int _isdigit(int c)
 /**
  * set_env - sets an environment variable with a value.
  * if it exist it modifies it if not it sets it.
- * @name: name of the variable.
- * @value: the value to set to the var name.
+ * @yname: name of the variable.
+ * @xvalue_i: the value to set to the var name.
  */
 
 void set_env(char *yname, char *xvalue_i)

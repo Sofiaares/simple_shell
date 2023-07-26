@@ -33,7 +33,7 @@ void (*check_built_ins(char *vstr))(char **, char *)
  * @i_line: A string representing the input from the executer.
  * Return: If function is found 0. Otherwise -1.
  */
-int is_built_in(char **vargs, char *i_line)
+int is_built_in_t(char **vargs, char *i_line)
 {
 	if (check_built_ins(vargs[0]) == NULL)
 		return (0);

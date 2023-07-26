@@ -42,7 +42,7 @@ char *search_full_path(char *command)
  * parse_path - finds environment variable in the environ and
  * split it into tokens.
  * @index: Indexing of the environment variable.
- * @str: represent the environment variable.
+ * @vstr: represent the environment variable.
  * Return: on success an array of token, on fail NULL is returned.
  */
 char **parse_path(int index, char *vstr)
@@ -52,7 +52,7 @@ char **parse_path(int index, char *vstr)
 	int rlen;
 	const char *dylmtr = ":";
 
-	rlen = _strlen_i(str);
+	rlen = _strlen_i(vstr);
 	en_var = environ[index] + (rlen + 1);
 	path_tokens = parse_line(env_var, dylmtr);
 	if (path_tkens == NULL)
@@ -61,8 +61,8 @@ char **parse_path(int index, char *vstr)
 }
 /**
  * build_full_path - Combine a tken in the tkens PATH array with a command.
- * @path: Represents a tken of the environment variable PATH.
- * @command: the command.
+ * @ypath: Represents a tken of the environment variable PATH.
+ * @command_i: the command.
  * Return: On success a full path of the command, Otherwise NULL.
  */
 char *build_full_path(char *ypath, char *command_i)
@@ -88,10 +88,10 @@ char *build_full_path(char *ypath, char *command_i)
 }
 
 /**
- * find_path_index - Finds an index of an environmental variable.
- * @env: Environment variable that in need to be found.
- * Return: on success returns the index of the environment variable.
- * otherwise returns -1.
+ * path_index_finder - Finds an index of an environmental variable.
+ * @envy: Environment variable that in need to be found.
+ * Return: on success returns the index of the environment variable
+ * otherwise returns -1
  */
 int path_index_finder(char *envy)
 {
