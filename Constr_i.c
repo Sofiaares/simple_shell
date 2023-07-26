@@ -118,7 +118,7 @@ void our_unseten_v_i(char *vargs[], __attribute__((unused)) char *i_line)
 
 	if (!name_i)
 		return;
-	index = find_path_index(name_i);
+	index = path_index_finder(name_i);
 	if (index != -1)
 	{
 		envi_mntal[index] = envi_mntal[index + 1];
