@@ -19,8 +19,8 @@ extern char **envi_mntal;
 
 /**
  * struct built_in - Defines the built_in funcs.
- * @built_in: The name of the build in command.
- * @f: A pointer to the right built_in funcs.
+ * @built: The name of the build in command.
+ * @func: A pointer to the right built_in funcs.
  */
 typedef struct built_in
 {
