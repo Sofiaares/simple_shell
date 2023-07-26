@@ -18,13 +18,13 @@
 extern char **envi_mntal;
 
 /**
- * struct built_in_t - Defines the built_in funcs.
+ * struct built_in - Defines the built_in_t funcs.
  * @built_in_t: The name of the build in command.
  * @f: A pointer to the right built_in funcs.
  */
-typedef struct built_in
+typedef struct built
 {
-	char *built_in;
+	char *built_ins;
 	void (*func)(char **, char *);
 } built_in;
 
@@ -35,7 +35,7 @@ void print_commands(char **cmd);
 void error_handl_i(char *vargs[], char *command[], int cmd_counter_i);
 
 /* modes sh-c */
-void batch(char *vargv[], char *envy[]);
+void batch(char *argv[], char *env[]);
 void interac_tive_i(char *cargv[], char *envy[])
 
 /* parsh liner and execu s sh */
@@ -52,13 +52,13 @@ void ourenv_i(char **q, char *r);
 void ourseten_v_i(char *vargs[], char *i_line);
 void our_unseten_v_i(char *vargs[], char *i_line);
 int is_built_in(char **vargs, char *i_line);
-void (*check_built_ins(char *str))(char **, char *);
+void (*check_built_ins(char *vstr))(char **, char *);
 
 /*line-s-path functions*/
 int path_index_finder(char *envy);
 char *build_full_path(char *path, char *command);
 char *search_full_path(char *command);
-char **parse_path(int index, char *vstr);
+char **parse_path(int index, char *str);
 
 /* simple s fuctions  */
 void set_env(char *name, char *value);
