@@ -1,114 +1,114 @@
 #include "shell.h"
 /**
- * search_full_path - searches for a valid path for the command
- * @command: the comand to look for in the path
- * Return: the fullpath if found , NULL otherwise
+ * search_full_path - search for a valid paths for the command
+ * @command: the comand that may look for in the path
+ * Return: the fullpath if found , NULL otherwise.
  */
+
 char *search_full_path(char *command)
 {
-	char *full_path;
-	char **path_tokens;
-	char ***free_arr;
-	int i = 0, var_index;
+	char *full_p_i;
+	char **path_tkens;
+	int j = 0, var_i;
 
-	var_index = find_path_index("PATH");
-	if (var_index == -1)
+	var_i = path_index_finder("PATH");
+	if (var_i == -1)
 		return (NULL);
-	path_tokens = parse_path(var_index, "PATH");
-	if (!path_tokens)
+	path_tkens = parse_path(var_i, "PATH");
+	if (!path_tkens)
 		return (NULL);
 
-	while (path_tokens[i])
+	while (path_tkens[j])
 	{
-		full_path = (build_full_path(path_tokens[i], command));
-		if (!full_path)
+		full_p_i = (build_full_path(path_tkens[j], command));
+		if (!full_p_i)
 		{
-			free_arr(path_tokens);
+			free_arri(path_tkens);
 			return (NULL);
 		}
-		if (access(full_path, X_OK) == 0)
+		if (access(full_p_i, X_OK_X) == 0)
 		{
-			free_arr(path_tokens);
-			return (full_path);
+			free_arri(path_tkens);
+			return (full_p_i);
 		}
-		free(full_path);
+		free_i(full_p_i);
 		i++;
 	}
-	free_arr(path_tokens);
+	free_arri(path_tkens);
 	return (NULL);
 }
 
 /**
  * parse_path - finds environment variable in the environ and
- * split it into tokens
- * @index: Index of the environment variable
- * @str: representing the environment variable
- * Return: on success an array of token, on fail NULL is returned
+ * split it into tokens.
+ * @index: Indexing of the environment variable.
+ * @str: represent the environment variable.
+ * Return: on success an array of token, on fail NULL is returned.
  */
-char **parse_path(int index, char *str)
+char **parse_path(int index, char *vstr)
 {
-	char *env_var; /*getenv("PATH");*/
-	char **path_tokens;
-	char ***parse_line;
-	int len;
-	const char *dlmtr = ":";
+	char *en_var; /*get_env("PATH");*/
+	char **path_tkens;
+	int rlen;
+	const char *dylmtr = ":";
 
-	len = strlen(str);
-	env_var = envp[index] + (len + 1);
-	path_tokens = &parse_line(env_var, dlmtr);
-	if (path_tokens == NULL)
+	rlen = _strlen_i(str);
+	en_var = environ[index] + (rlen + 1);
+	path_tokens = parse_line(env_var, dylmtr);
+	if (path_tkens == NULL)
 		return (NULL);
-	return (path_tokens);
+	return (path_tkens);
 }
 /**
- * build_full_path - Combines a token in the tokens PATH array with a command
- * @path: Represents a token of the environment variable PATH
- * @command: the command
- * Return: On success a full path of the command, Otherwise NULL
+ * build_full_path - Combine a tken in the tkens PATH array with a command.
+ * @path: Represents a tken of the environment variable PATH.
+ * @command: the command.
+ * Return: On success a full path of the command, Otherwise NULL.
  */
-char *build_full_path(char *path, char *command)
+char *build_full_path(char *ypath, char *command_i)
 {
-	int path_len;
-	int command_len;
-	int len;
+	int path_rlen_i;
+	int command_ren;
+	int rlen;
 	char *built;
 
-	if (path == NULL || command == NULL)
+	if (ypath == NULL || command_i == NULL)
 		return (NULL);
-	path_len = strlen(path);
-	command_len = strlen(command);
-	len = path_len + command_len + 2;
+	path_rlen_i = _strlen_i(ypath);
+	command_len = _strlen_i(command_i);
+	len = path_rlen_i + command_ren + 2;
 
-	built = malloc(sizeof(char) * len);
+	built = malloc(sizeof(char) * rlen);
 	if (built == NULL)
 		return (NULL);
-	strcpy(built, path);
-	strcat(built, "/");
-	strcat(built, command);
+	_str_cat_i(built, ypath);
+	_str_copy_i(built, "/");
+	_str_cat_i(built, command_i);
 	return (built);
 }
-/**
- * find_path_index - Finds the index of an environmental variable
- * @env: Environment variable that needs to be found
- * Return: on success returns the index of the environment variable
- * otherwise returns -1
- */
-int find_path_index(char *env)
-{
-	int i;
-	int len;
-	int j;
 
-	len = strlen(env);
-	for (i = 0; env[i] != NULL; i++)
+/**
+ * find_path_index - Finds an index of an environmental variable.
+ * @env: Environment variable that in need to be found.
+ * Return: on success returns the index of the environment variable.
+ * otherwise returns -1.
+ */
+int path_index_finder(char *envy)
+{
+	int j;
+	int rlen;
+	int x;
+
+	rlen = _strlen_i(envy);
+	for (i = 0; environ[j] != NULL; j++)
 	{
-		for (j = 0; j < len; j++)
+		for (x = 0; x < len; x++)
 		{
-			if (env[i][j] != env[j])
+			if (environ[j][x] != envy[x])
 				break;
 		}
-		if (j == len && env[i][j] == '=')
-			return (i);
+		if (x == rlen && environ[j][x] == '=')
+			return (j);
 	}
 	return (-1);
 }

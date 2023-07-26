@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
- * _isdigit - checks for a digit
- * @c: num
- * Return: Always 0
+ * _isdigit - checks for a digits
+ *@c: num
+ * Return: Always 0.
  */
+
 int _isdigit(int c)
 {
 	if (c <= 57 && c >= 48)
@@ -18,80 +19,82 @@ int _isdigit(int c)
  * @name: name of the variable.
  * @value: the value to set to the var name.
  */
-void set_env(char *name, char *value)
-{
-	int index;
-	char *str;
-	char **envp = envp;
-	int name_len, value_len, len;
 
-	if (!name || !value)
+void set_env(char *yname, char *xvalue_i)
+{
+	int index_n;
+	char *vstr;
+	char **en_vp = environ;
+	int name_rlen, value_rlen, rlen;
+
+	if (!yname || !xvalue_i)
 	{
 		perror("setenv()");
 		return;
 	}
-	name_len = strlen(name);
-	value_len = strlen(value);
-	len = name_len + value_len + 2;
+	name_len = _strlen_i(yname);
+	value_len = _strlen_i(xvalue_i);
+	len = name_rlen + value_rlen + 2;
 
-	str = malloc(len * sizeof(char));
-	if (!str)
+	vstr = malloc(rlen * sizeof(char));
+	if (!vstr)
 	{
-		perror("Allocations fails");
+		perror("Alloc fails");
 		return;
 	}
-	strcpy(str, name), strcat(str, "="), strcat(str, value);
-	index = find_path_index(name);
-	if (index != -1)
-		envp[index] = str;
+	_str_copy_i(vstr, yname), _str_cat_i(vstr, "="), _str_cat_i(vstr, xvalue_i);
+	index = path_index_finder(yname);
+	if (index_n != -1)
+		environ[index_n] = vstr;
 	else
 	{
-		while (*envp)
-			envp++;
-		*envp = str;
-		envp++;
-		*envp = NULL;
+		while (*en_vp)
+			en_vp++;
+		*en_vp = vstr;
+		en_vp++;
+		*en_vp = NULL;
 	}
 }
 
 /**
  * _atoi - convert a string to an integer
  * @s: str
- * Return: 0 if number unfound and number otherwise
+ * Return: 0 if no number found and number otherwise
  */
+
 int _atoi(char *s)
 {
-	int i, d, n, len, f, digit;
+	int ix, di, nx, rlen, g, digit_i;
 
-	i = 0;
-	d = 0;
-	n = 0;
-	len = 0;
-	f = 0;
-	digit = 0;
+	ix = 0;
+	di = 0;
+	nx = 0;
+	rlen = 0;
+	g = 0;
+	digit_i = 0;
 
-	while (s[len] != '\0')
-		len++;
+	while (s[rlen] != '\0')
+		rlen++;
 
-	while (i < len && f == 0)
+	while (ix < rlen && g == 0)
 	{
-		if (s[i] == '-')
-			++d;
+		if (s[ix] == '-')
+			++di;
 
-		if (s[i] >= '0' && s[i] <= '9')
+		if (s[ix] >= '0' && s[ix] <= '9')
 		{
-			digit = s[i] - '0';
-			if (d % 2)
-				digit = -digit;
-			n = n * 10 + digit;
-			f = 1;
-			if (s[i + 1] < '0' || s[i + 1] > '9')
+			digit_i = s[ix] - '0';
+			if (di % 2)
+				digit_i = -digit_i;
+			n = n * 10 + digit_i;
+			g = 1;
+			if (s[ix + 1] < '0' || s[ix + 1] > '9')
 				break;
-			f = 0;
+			g = 0;
 		}
-		i++;
+		ix++;
 	}
-	if (f == 0)
+	if (g == 0)
 		return (0);
 
 	return (n);
@@ -100,8 +103,9 @@ int _atoi(char *s)
 /**
  * _isupper - checks for uppercase character
  * @c: char
- * Return: Always 0
+ * Return: Always 0.
  */
+
 int _isupper(int c)
 {
 	if (c <= 90 && c >= 65)
