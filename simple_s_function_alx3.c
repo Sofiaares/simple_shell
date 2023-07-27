@@ -1,110 +1,114 @@
 #include "shell.h"
 
 /**
- * _isdigit - checks for a digit
- * @c: num
- * Return: Always 0
+ * _isdigit_ - checks the code digit
+ *@y: num
+ * Return: Always 0.
  */
-int _isdigit(int c)
+
+int _isdigit_(int y)
 {
-	if (c <= 57 && c >= 48)
+	if (y <= 57 && y >= 48)
 		return (1);
 	return (0);
 }
 
 /**
- * set_env - sets an environment variable with a value.
+ * set_env - sets an envi variable with a value.
  * if it exist it modifies it if not it sets it.
- * @name: name of the variable.
- * @value: the value to set to the var name.
+ * @na: name of the variable.
+ * @valu: the value to set to the var name.
  */
-void set_env(char *name, char *value)
+
+void set_env(char *na, char *valu)
 {
 	int index;
-	char *str;
-	char **envp = envp;
-	int name_len, value_len, len;
+	char *rts;
+	char **envo = environ;
+	int na_rlen, valu_rlen, rlen;
 
-	if (!name || !value)
+	if (!na || !valu)
 	{
 		perror("setenv()");
 		return;
 	}
-	name_len = strlen(name);
-	value_len = strlen(value);
-	len = name_len + value_len + 2;
+	na_rlen = _strlen(na);
+	valu_rlen = _strlen(valu);
+	rlen = na_rlen + valu_rlen + 2;
 
-	str = malloc(len * sizeof(char));
-	if (!str)
+	rts = malloc(rlen * sizeof(char));
+	if (!rts)
 	{
-		perror("Allocations fails");
+		perror("Alloc fails");
 		return;
 	}
-	strcpy(str, name), strcat(str, "="), strcat(str, value);
-	index = find_path_index(name);
+	_strcpy_(rts, na), _strcat_(rts, "="), _strcat_(rts, valu);
+	index = find_path_index(na);
 	if (index != -1)
-		envp[index] = str;
+		environ[index] = rts;
 	else
 	{
-		while (*envp)
-			envp++;
-		*envp = str;
-		envp++;
-		*envp = NULL;
+		while (*envo)
+			envo++;
+		*envo = rts;
+		envo++;
+		*envo = NULL;
 	}
 }
 
 /**
- * _atoi - convert a string to an integer
- * @s: str
- * Return: 0 if number unfound and number otherwise
+ * _atoi - converture of string to an integer
+ * @v: string
+ * Return: 0 if no number found and number otherwise
  */
-int _atoi(char *s)
+
+int _atoi(char *v)
 {
-	int i, d, n, len, f, digit;
+	int i, ds, ne, elen, ff, sdigit;
 
 	i = 0;
-	d = 0;
-	n = 0;
-	len = 0;
-	f = 0;
-	digit = 0;
+	ds = 0;
+	ne = 0;
+	elen = 0;
+	ff = 0;
+	sdigit = 0;
 
-	while (s[len] != '\0')
-		len++;
+	while (v[elen] != '\0')
+		elen++;
 
-	while (i < len && f == 0)
+	while (i < elen && ff == 0)
 	{
-		if (s[i] == '-')
-			++d;
+		if (v[i] == '-')
+			++ds;
 
-		if (s[i] >= '0' && s[i] <= '9')
+		if (v[i] >= '0' && v[i] <= '9')
 		{
-			digit = s[i] - '0';
-			if (d % 2)
-				digit = -digit;
-			n = n * 10 + digit;
-			f = 1;
-			if (s[i + 1] < '0' || s[i + 1] > '9')
+			sdigit = v[i] - '0';
+			if (ds % 2)
+				sdigit = -sdigit;
+			ne = ne * 10 + sdigit;
+			ff = 1;
+			if (v[i + 1] < '0' || v[i + 1] > '9')
 				break;
-			f = 0;
+			ff = 0;
 		}
 		i++;
 	}
-	if (f == 0)
+	if (ff == 0)
 		return (0);
 
-	return (n);
+	return (ne);
 }
 
 /**
  * _isupper - checks for uppercase character
- * @c: char
- * Return: Always 0
+ * @ch: char
+ * Return: Always 0.
  */
-int _isupper(int c)
+
+int _isupper(int ch)
 {
-	if (c <= 90 && c >= 65)
+	if (ch <= 90 && ch >= 65)
 		return (1);
 
 	return (0);

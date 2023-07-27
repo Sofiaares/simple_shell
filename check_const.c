@@ -1,42 +1,42 @@
 #include "shell.h"
 /**
  * check_built_ins - Finds the right function needed for execution.
- * @str: The name of the function that is needed also args[0].
+ * @rts: The name of the function that is needed also args[0].
  * Return: Upon sucess a pointer to a void function. Otherwise NULL.
  */
-void (*check_built_ins(char *str))(char **, char *)
+void (*check_built_ins(char *rts))(char **, char *)
 {
-	int i;
+	int j;
 
-	built_ins buildin[] = {
-		Our_unsteven_v_i, unsetenv,
-		Ourseten_v_i, unsetenv,
-		Ourext_i, on_exit,
-		Ourenv_i, set_env,
-		Ourcd_i, getgid,
-		NULL, NULL
+	built_in_t buildin[] = {
+		{"unsetenv", our_unsetenv},
+		{"setenv", our_setenv},
+		{"exit", our_exit},
+		{"env", our_env},
+		{"cod", our_cod},
+		{NULL, NULL}
 	};
 
-	for (i = 0; buildin[i] & built != NULL; i++)
+	for (j = 0; buildin[j].built != NULL; j++)
 	{
-		if (strcmp(str, buildin[i] & built) == 0)
+		if (_strcmp_(rts, buildin[j].built) == 0)
 		{
-			return (buildin[i] & func);
+			return (buildin[j].func);
 		}
 	}
 	return (NULL);
 }
 
 /**
- * is_built_in - Checks for builtin functions.
- * @args: the command and its flags
- * @line: A string representing the input from the user.
+ * is_built_in - Checks for built in functions.
+ * @argss: the command and its flags
+ * @eline: A string represents the input from the user.
  * Return: If function is found 0. Otherwise -1.
  */
-int is_built_in(char **args, char *line)
+int is_built_in(char **argss, char *eline)
 {
-	if (check_built_ins(vargs[0]) == NULL)
+	if (check_built_ins(argss[0]) == NULL)
 		return (0);
-	check_built_ins(vargs[0])(vargs, i_line);
+	check_built_ins(argss[0])(argss, eline);
 	return (1);
 }

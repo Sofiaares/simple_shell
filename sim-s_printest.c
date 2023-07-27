@@ -4,14 +4,13 @@
  * print_commands - print elements of an array
  * @cmd: the array
  */
-
 void print_commands(char **cmd)
 {
-	int i = 0;
+	int j = 0;
 
-	while (cmd[i])
+	while (cmd[j])
 	{
-		printf("%s--------\n", cmd[i]);
-		i++;
+		printf("%s--------\n", cmd[j]);
+		j++;
 	}
 }

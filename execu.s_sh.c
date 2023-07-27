@@ -2,33 +2,32 @@
 
 
 /**
- * execute_process_i - it creates a source process it passed the command which
- * execute in
- * @vargs: an array that contains command and all arguments
- * @envy: variables
- * Return: same thing as exec_ve.
+ * creates_process - create a child process which passed the command in
+ * @argss: arr contains the command and its arguments
+ * @envy: environ variable
+ * Return: same as execve.
  */
 
 
-void execute_process_i(char **vargs, char *envy[])
+void creates_process(char **argss, char *envy[])
 {
-	int status;
-	pid_t pid_i = fork();
+	int statut;
+	pid_t pids = fork();
 
-	if (pid_i == 0)
+	if (pids == 0)
 	{
-		if (exec_ve(vargs[0], vargs, envy) == -1)
+		if (execve(argss[0], argss, envy) == -1)
 		{
-			perror("Exec_ve(): ");
+			perror("Execve(): ");
 		}
 	}
-	else if (pid_i == -1)
+	else if (pids == -1)
 	{
 		perror("Fork():");
-		exit(exit_failure);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		wait(&status);
+		wait(&statut);
 	}
 }

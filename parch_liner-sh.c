@@ -1,92 +1,92 @@
 #include "shell.h"
 
 /**
- * you_readline_i - it reads a line from a terminal
- * Return: pointer points to a str with content
+ * read_line - read a line from terminal
+ * Return: pointer which points to a str with the line content
  */
 
-char *you_readline_i(void)
+char *read_line(void)
 {
-	char *rline_i = NULL;
-	size_t buxsizze = 0;
+	char *rline = NULL;
+	size_t bxf_size = 0;
 
-	if (getline(&rline, &buxsizze, xstdin_i) == -1) /* if getline fail */
+	if (getline(&rline, &bxf_size, stdin) == -1) /* if getline fails */
 	{
-		_puts_i("\n");
-		free_i(line);
-		exit(exit_failure);
+		_puts("\n");
+		free(rline);
+		exit(EXIT_FAILURE);
 	}
 	return (rline);
 }
 
 /**
- * ct_tken_i - it takes tokens and given in put.
- * @rline: string to split input
- * @dlmtoho: to delimit and cut the input specify
- * Return: the number of token.
+ * count_token - countof token in put.
+ * @rline: the string input to split
+ * @ydlmt: delimiter specify where to cut the input
+ * Return: number of tokens.
  */
 
-int ct_tken_i(char *rline, const char *dlmtoho)
+int count_token(char *rline, const char *ydlmt)
 {
-	char *rline_cp;
-	char *tken;
+	char *linecop;
+	char *tokens;
 	int j;
 
-	rline_cp = _strd_up_i(rline);
-	if (rline_cp == NULL)
+	linecop = _strdup_(rline);
+	if (linecop == NULL)
 		return (-1);
-	tken = strtok(rline_cp, dlmtoho);
-	for (j = 0; tken != NULL; j++)
-		tken = strtok(NULL, dlmtoho);
-	free_i(rline_cp);
+	tokens = strtok(linecop, ydlmt);
+	for (j = 0; tokens != NULL; j++)
+		tokens = strtok(NULL, ydlmt);
+	free(linecop);
 	return (j);
 }
 
 /**
- * prase_yline_i - input from the utilis and it makes array of string
- * @inputin: the command to line in put
- * @ydelimit:  put where a seperation str tok that the string can splited
- * Return: parsed an array of strings from command line.
+ * parse_line - in put from the user and make an array of strings
+ * @in_put: the command line input
+ * @delimi: separater where strtok can split the string
+ * Return: an array of strings parsed from command line input.
  */
 
-char **prase_yline_i(char *inputin, const char *ydelimit)
+char **parse_line(char *in_put, const char *delimi)
 {
-	char **comnd_arri;
-	char *tken;
-	char *input_i;
-	int s_count_i;
+	char **commandarr;
+	char *tokens;
+	char *inputcop;
+	int t_counts;
 	int j = 0;
 
-	s_count = count_tken_i(inputin, ydelimit);
-	if (s_count_i == -1)
+	t_counts = count_token(in_put, delimi);
+	if (t_counts == -1)
 	{
-		free_i(inputin);
+		free(in_put);
 		exit(1);
 	}
-	if (inputin == NULL)
+	if (in_put == NULL)
 		return (NULL);
-	input_i = _strd_up_i(inputin);
+	inputcop = _strdup_(in_put);
 
-	if (input_i == NULL)
+	if (inputcop == NULL)
 		return (NULL);
-	comnd_arri = malloc((s_count_i + 1) * sizeof(char *));
-	if (!comnd_arri)
+	commandarr = malloc((t_counts + 1) * sizeof(char *));
+	if (!commandarr)
 	{
-		free_i(inputin);
+		free(in_put);
 		perror("Alloc fails");
-		exit(exit_failure);
+		exit(EXIT_FAILURE);
 	}
 
-	tken = str_tok_i(input_i, ydelimit);
-	while (tken)
+	tokens = strtok(inputcop, delimi);
+	while (tokens)
 	{
-		if (tken[0] == '#')
+		if (tokens[0] == '#')
 			break;
-		comnd_arri[j] = _strd_up_i(tken);
-		tken = str_tok_i(NULL, ydelimit);
+		commandarr[j] = _strdup_(tokens);
+		tokens = strtok(NULL, delimi);
 		j++;
 	}
-	comnd_arri[j] = NULL;
-	free_i(input_i);
-	return (comnd_arri);
+	commandarr[j] = NULL;
+	free(inputcop);
+	return (commandarr);
 }

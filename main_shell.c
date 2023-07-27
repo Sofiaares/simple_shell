@@ -1,44 +1,110 @@
 #include "shell.h"
-#include <errno.h>
 
 /**
- * main - entry point
- * @ac: arg count
- * @av: arg vector
- * Return: 0 on success, 1 on error
+ * main - Entry point of the program
+ * @argc: arg count
+ * @argw: arg vector
+ * @envy: the inviron variable.
+ * Return: Always 0 on success.
  */
-int main(int ac, char **av)
+int main(__attribute__((unused)) int argc, char *argw[], char *envy[])
 {
-        ino_t info[] = { INO_INIT };
-        int fd = 2;
+	signal(SIGINT, SIG_IGN);
+	if (isatty(STDIN_FILENO) == 1)
+	{
+		interactive(argw, envy);
+	}
+	else
+		batch(argw, envy);
+	return (0);
+}
 
-        asm ("mov %1, %0\n\t"
-                        "add $3, %0"
-                        : "=r" (fd)
-                        : "r" (fd));
+/**
+ * interactive - execute command on the mode interactive.
+ * @argw: argument vector
+ * @envy: environ variable.
+ */
+void interactive(char *argw[], char *envy[])
+{
+	char *rline, **argss, *cmd_full_path;
+	int cmdcounter = 1;
+	struct stat statbxf;
 
-        if (ac == 2)
-        {
-                fd = popen(av[1], O_RDONLY);
-                if (fd == -1)
-                {
-                        if (errno == EACCES)
-                                exit(126);
-                        if (errno == ENOENT)
-                        {
-                                _puts_i(av[0]);
-                                _puts_i(": 0: Can't open ");
-                                _puts_i(av[1]);
-                                _putchar('\n'); 
-                                _putchar(BUF_FLUSH);
-                                exit(127);
-                        }
-                        return (EXIT_FAILURE);
-                }
-                info->readfd = fd;
-        }
-        populate_env_list(info);
-        read_history(info);
-        hsh(info, av);
-        return (EXIT_SUCCESS);
+	while (1)
+	{
+		write(STDOUT_FILENO, "#Home$ ", 7);
+		fflush(stdout);
+		rline = read_line(), argss = parse_line(rline, DLMT);
+		if (!argss[0])
+		{
+			free(rline), free_arr(argss);
+			continue;
+		}
+		else if (!is_built_in(argss, rline))
+		{
+			cmd_full_path = search_full_path(argss[0]);
+			if (cmd_full_path || (stat(argss[0], &statbxf) == 0))
+			{
+				if (cmd_full_path)
+				{
+					argss[0] = _strdup_(cmd_full_path);
+					free(cmd_full_path);
+				}
+				creates_process(argss, envy);
+			}
+			else
+				handle_exe_err(argw, argss, cmdcounter);
+			free(rline), free_arr(argss), cmdcounter++;
+		}
+		else
+		{
+			free(rline), free_arr(argss);
+		}
+	}
+}
+
+/**
+ * batch - execute command on the mode non-interactive.
+ * @argw: argument vector
+ * @envy: environ variable.
+ */
+
+void batch(char *argw[], char *envy[])
+{
+	char *rline, **argss, *cmd_full_path;
+	int cmdcounter = 1;
+	struct stat statbxf;
+
+	rline = read_line();
+	argss = parse_line(rline, DLMT);
+	if (!argss[0])
+	{
+		free(rline);
+		free_arr(argss);
+	}
+	else if (!is_built_in(argss, rline))
+	{
+		cmd_full_path = search_full_path(argss[0]);
+		if (cmd_full_path || (stat(argss[0], &statbxf) == 0) ||
+				(access(argss[0], X_OK) == 0))
+		{
+			if (cmd_full_path)
+			{
+				free(argss[0]);
+				argss[0] = _strdup_(cmd_full_path);
+				free(cmd_full_path);
+			}
+		creates_process(argss, envy);
+		}
+		else
+			handle_exe_err(argw, argss, cmdcounter);
+		free(rline);
+		free_arr(argss);
+		cmdcounter++;
+	}
+	else
+	{
+		free(rline);
+		free_arr(argss);
+	}
 }

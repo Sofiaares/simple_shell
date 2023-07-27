@@ -1,129 +1,129 @@
 #include "shell.h"
 
 /**
- * ourcod_i - to change the directory we work in
- * it can passed to it.
- * if there is no parameters that passed it can change dir to HOME.
- * @vargs: the command and its flags
- * @i_line: A string of the input from the executer.
+ * our_cod - Changes the current working directory to
+ * the directory passed to it.
+ * if no parameter is passed it will change directory to HOME.
+ * @argss: the command and its flags
+ * @eline: A string representing the input from the user.
  */
 
-void ourcod_i(char **vargs, __attribute__((unused)) char *i_line)
+void our_cod(char **argss, __attribute__((unused)) char *eline)
 {
-	char *bux = NULL;
-	size_t sizze = 0;
+	char *bxf = NULL;
+	size_t ysize = 0;
 	int index;
-	char *pxd = getcwd(bux, sizze);
+	char *pwd = getcwd(bxf, ysize);
 
-	if (vargs[1] == NULL)
+	if (argss[1] == NULL)
 	{
-		index = path_index_finder("HOME");
-		ch_dir_i((environ[index]) + 5);
+		index = find_path_index("HOME");
+		chdir((environ[index]) + 5);
 	}
-	else if (_strcmps_i(vargs[1], "-") == 0)
+	else if (_strcmp_(argss[1], "-") == 0)
 	{
-		index = path_index_finder("OLDPxD");
+		index = find_path_index("OLDPWD");
 		if (index != -1)
-			ch_dir_i((environ[index]) + 7);
+			chdir((environ[index]) + 7);
 		else
 			perror("cd: ");
 	}
 	else
 	{
-		if (ch_dir_i(vargs[1]) == -1)
+		if (chdir(argss[1]) == -1)
 		{
 			perror("error: ");
 		}
 	}
-	set_env("OLDPxD", pxd);
-	free_i(bux);
-	free_i(pxd);
+	set_env("OLDPWD", pwd);
+	free(bxf);
+	free(pwd);
 }
 
 /**
- * ourenv_i - it Prints all variables environmental in the shell.
- * @q: the command and flags , but it may not be used here
- * @r: A string of input from the user. also may not be used.
+ * our_env - Prints every environmental variables in the current shell.
+ * @m: the command and its flags , but not used here
+ * @t: A string representing the input from the user. also not used.
  */
-void ourenv_i(__attribute__((unused)) char **q, __attribute__((unused))
-		 char *r)
+void our_env(__attribute__((unused)) char **m, __attribute__((unused)) char *t)
 {
 	int j;
 
 	for (j = 0; environ[j] != NULL; j++)
 	{
-		_puts_i(environ[j]);
-		_puts_i("\n");
+		_puts(environ[j]);
+		_puts("\n");
 	}
 }
 
 /**
- * ourext_i - it exit shell. After frees allocs.
- * @vargs: the command and all flags
- * @i_line: A string of the input.
+ * our_exit - Exits the shell. After freeing allocated resources.
+ * @argss: the command and its flags
+ * @eline: A string representing the input from the user.
  */
-void ourext_i(char **vargs, char *i_line)
+void our_exit(char **argss, char *eline)
 {
-	int STATUS = exit_success;
+	int status = EXIT_SUCCESS;
 	int j = 0;
 
-	if (vargs[1])
+	if (argss[1])
 	{
-		while (vargs[1][j])
+		while (argss[1][j])
 		{
-			if (!_i_sdigit(vargs[1][j]))
+			if (!_isdigit_(argss[1][j]))
 				break;
 			j++;
 		}
-		if (j == _strlen_i(vargs[1]))
-			status = _atoi(vargs[1]);
+		if (j == _strlen(argss[1]))
+			status = _atoi(argss[1]);
 	}
 	else
-		STATUS = exit_success;
+		status = EXIT_SUCCESS;
 
-	free_i(i_line);
-	free_arr(vargs);
-	exit(STATUS);
+	free(eline);
+	free_arr(argss);
+	exit(status);
 }
 
 #include "shell.h"
 
 /**
- * ourseten_v_i - starts a new variable environmental,
- * or it may modify an existing one
- * @vargs: the variables array
- * @i_line: the input from the excuter
+ * our_setenv - Initializ new environment variable,
+ * or modify an existing one
+ * @argss: the variables array
+ * @eline: the input from the user
  */
-void ourseten_v_i(char *vargs[], __attribute__((unused)) char *i_line)
+void our_setenv(char *argss[], __attribute__((unused)) char *eline)
 {
-	char *name_i, *vlue_i;
+	char *na, *valu;
 
-	if (!vargs[2] || !vargs[1])
+	if (!argss[2] || !argss[1])
 	{
-		perror("seten_v_i()");
+		perror("setenv()");
 		return;
 	}
-	name_i = vargs[1];
-	vlue_i = vargs[2];
-	set_env(name_i, vlue_i);
+	na = argss[1];
+	valu = argss[2];
+	set_env(na, valu);
 }
 /**
- * our_unseten_v_i - not set variable environmental name
- * @vargs: array of tkens it contains var name to unset vargs.
- * @i_line: the input that excuter typed or given by mode non-interactive.
+ * our_unsetenv - unset the environment variable name
+ * @argss: array of tokens containing the var name to unset args[1].
+ * @eline: the input typed by the user or given by non-interactive mode.
  */
-void our_unseten_v_i(char *vargs[], __attribute__((unused)) char *i_line)
+void our_unsetenv(char *argss[], __attribute__((unused)) char *eline)
 {
 	int index;
-	char *name_i = vargs[1];
+	char *na = argss[1];
 
-	if (!name_i)
+	if (!na)
 		return;
-	index = path_index_finder(name_i);
+	index = find_path_index(na);
 	if (index != -1)
 	{
 		environ[index] = environ[index + 1];
 	}
 	else
-		perror("unseten_v_i() ");
+		perror("unsetenv() ");
 }
+

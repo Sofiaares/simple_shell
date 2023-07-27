@@ -1,77 +1,77 @@
 #include "shell.h"
 /**
- * _puts_i - do thing
- * @q: string
+ * _puts - prints a string
+ * @y: string
  * Return: void
  */
-void _puts_i(char *q)
+void _puts(char *y)
 {
-	if (*q != '\0')
+	if (*y != '\0')
 	{
-		_putchar(*q);
-		_puts_i(q + 1);
+		_putchar(*y);
+		_puts(y + 1);
 	}
 }
 
 /**
- * _strlen_i - it returns the length of string
- * @q: string
- * Return: void
+ * _strlen - return the length of a string
+ * @y: str
+ * Return: lrength
  */
-int _strlen_i(char *q)
+int _strlen(char *y)
 {
-	if (*q != '\0')
-		return (1 + _strlen_i(q + 1));
+	if (*y != '\0')
+		return (1 + _strlen(y + 1));
 	else
 		return (0);
 }
 
 /**
- * free_i - it free an array
- * @arri: array to free_i
+ * free_arr - free array
+ * @arr1: array to free
  */
-void free_i(char **arri)
+void free_arr(char **arr1)
 {
 	int j;
 
-	for (j = 0; arri[j]; j++)
+	for (j = 0; arr1[j]; j++)
 	{
-		free_i(arr[j]);
+		free(arr1[j]);
 	}
-	free_i(arri);
+	free(arr1);
 }
 
 /**
- * print_num_i - capitaliz words of a string.
- * @n: nrr
+ * print_number - capitaliz any word of a string.
+ * @v: num
  * Return: void
  */
 
-void print_num_i(int n)
+void print_number(int v)
 {
-	unsigned int nrr;
+	unsigned int v1;
 
-	nrr = n;
-	if (n < 0)
+	v1 = v;
+	if (v < 0)
 	{
 		_putchar('-');
-		nrr = -n;
+		v1 = -v;
 	}
-	if (nrr / 10)
+	if (v1 / 10)
 	{
-		print_num_i(nrr / 10);
+		print_number(v1 / 10);
 	}
-	_putchar(nrr % 10 + '0');
+	_putchar(v1 % 10 + '0');
 }
 
 /**
- * _putchar - it writes a character c to st dout
- * @c: A character to use and print
+ * _putchar - writs the character c to stdout
+ * @ch: The character to print
  *
  * Return: On success 1.
- * On error, -1 is returned, and errno is all set appropriately.
+ * On error, -1 is returned, and errno is set appropriately.
  */
-int _putchar(char c)
+int _putchar(char ch)
 {
-	return (write(1, &c, 1));
+	return (write(1, &ch, 1));
 }

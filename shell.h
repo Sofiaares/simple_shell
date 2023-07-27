@@ -18,60 +18,60 @@
 extern char **environ;
 
 /**
- * struct builtin_d - Defines the builtins  functions.
+ * struct built_in - Defines the builtins functions.
  * @built: The name of the build in command.
- * @f: A pointer to the right builtin functions.
+ * @func: A pointer to the right builtin function.
  */
-typedef struct built_n
+typedef struct built_in
 {
-	char *built_ins;
+	char *built;
 	void (*func)(char **, char *);
-} built_in;
+} built_in_t;
 
-/* sim-s_printest */
+/* test func */
 void print_commands(char **cmd);
 
-/* error handl */
-void error_handl_i(char *vargs[], char *command[], int cmd_counter_i);
+/* handle errors */
+void handle_exe_err(char *argvs[], char *comands[], int cmdcounter);
 
-/* modes sh-c */
-void batch(char *cargv[], char *envy[]);
-void interac_tive_i(char *cargv[], char *envy[])
+/* modes */
+void batch(char *argv[], char *env[]);
+void interactive(char *argv[], char *env[]);
 
-/* parsh liner and execu s sh */
-char *you_readline_i(void);
-int ct_tken_i(char *rline, const char *dlmtoho);
-char **prase_yline_i(char *inputin, const char *ydelimit);
-int execute_args(char **vargs);
-void execute_process_i(char **vargs, char *envy[]);
+/* parse and execute functions */
+char *read_line(void);
+int count_token(char *rline, const char *ydlmt);
+char **parse_line(char *rline, const char *delimi);
+int execute_args(char **args);
+void creates_process(char **comands, char *envy[]);
 
-/* Constr_i */
-void ourcod_i(char **vargs, char *i_line);
-void ourext_i(char **vargs, char *i_line);
-void ourenv_i(char **q, char *r);
-void ourseten_v_i(char *vargs[], char *i_line);
-void our_unseten_v_i(char *vargs[], char *i_line);
-int is_built_in(char **vargs, char *i_line);
-void (*check_built_ins(char *vstr))(char **, char *);
+/* Builtin functions */
+void our_cod(char **argss, char *eline);
+void our_exit(char **argss, char *eline);
+void our_env(char **m, char *t);
+void our_setenv(char *argss[], char *eline);
+void our_unsetenv(char *argss[], char *eline);
+int is_built_in(char **args, char *line);
+void (*check_built_ins(char *str))(char **, char *);
 
-/*line-s-path functions*/
-int path_index_finder(char *envy);
-char *build_full_path(char *ypath, char *command_i);
+/*path functions*/
+int find_path_index(char *envy);
+char *build_full_path(char *paths, char *commande);
 char *search_full_path(char *command);
-char **parse_path(int index, char *vstr);
+char **parse_path(int index, char *rts);
 
-/* simple s fuctions  */
-void set_env(char *name, char *value);
-char *_strd_up_i(char *src_v);
-int _strcmps_i(char *sx, char *sv);
-int _putchar(char c);
-int _strlen_i(char *q);
-void _puts_i(char *q);
-void free_i(char *arr[]);
-void print_num_i(int n);
-char *_str_cat_i(char *vest, char *src_v);
-char *_str_copy_i(char *vest, char *src_v);
-int _atoi(char *s);
-int _isdigit(int c);
-int _isupper(int c);
+/* alx functions */
+void set_env(char *na, char *valu);
+char *_strdup_(char *src1);
+int _strcmp_(char *b1, char *b2);
+int _putchar(char ch);
+int _strlen(char *y);
+void _puts(char *y);
+void free_arr(char *arr1[]);
+void print_number(int v);
+char *_strcat_(char *det, char *src1);
+char *_strcpy_(char *det, char *src1);
+int _atoi(char *v);
+int _isdigit_(int y);
+int _isupper(int ch);
 #endif
