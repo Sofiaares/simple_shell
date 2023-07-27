@@ -6,25 +6,25 @@
  */
 void (*check_built_ins(char *rts))(char **, char *)
 {
-        int j;
+	int j;
 
-        built_in_t buildin[] = {
-                {"unsetenv", our_unsetenv},
-                {"setenv", our_setenv},
-                {"exit", our_exit},
-                {"env", our_env},
-                {"cod", our_cod},
-                {NULL, NULL}
-        };
+	built_in_t buildin[] = {
+		{"unsetenv", our_unsetenv},
+		{"setenv", our_setenv},
+		{"exit", our_exit},
+		{"env", our_env},
+		{"cod", our_cod},
+		{NULL, NULL}
+	};
 
-        for (j = 0; buildin[j].built != NULL; j++)
-        {
-                if (_strcmp_(rts, buildin[j].built) == 0)
-                {
-                        return (buildin[j].func);
-                }
-        }
-        return (NULL);
+	for (j = 0; buildin[j].built != NULL; j++)
+	{
+		if (_strcmp_(rts, buildin[j].built) == 0)
+		{
+			return (buildin[j].func);
+		}
+	}
+	return (NULL);
 }
 
 /**
@@ -35,8 +35,8 @@ void (*check_built_ins(char *rts))(char **, char *)
  */
 int is_built_in(char **argss, char *eline)
 {
-        if (check_built_ins(argss[0]) == NULL)
-                return (0);
-        check_built_ins(argss[0])(argss, eline);
-        return (1);
+	if (check_built_ins(argss[0]) == NULL)
+		return (0);
+	check_built_ins(argss[0])(argss, eline);
+	return (1);
 }
