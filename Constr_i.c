@@ -8,7 +8,7 @@
  * @eline: A string representing the input from the user.
  */
 
-void our_cd(char **argss, __attribute__((unused)) char *eline)
+void our_cod(char **argss, __attribute__((unused)) char *eline)
 {
 	char *bxf = NULL;
 	size_t size = 0;

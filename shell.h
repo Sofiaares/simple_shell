@@ -35,8 +35,8 @@ void print_commands(char **cmd);
 void handle_exe_err(char *argvs[], char *comands[], int cmdcounter);
 
 /* modes */
-void batch(char *argv[], char *env[]);
-void interactive(char *argv[], char *env[]);
+void batch(char *argw[], char *envy[]);
+void interactive(char *argw[], char *envy[]);
 
 /* parse and execute functions */
 char *read_line(void);
