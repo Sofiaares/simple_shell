@@ -12,7 +12,7 @@ int main(__attribute__((unused)) int argc, char *argw[], char *envy[])
 	signal(SIGINT, SIG_IGN);
 	if (isatty(STDIN_FILENO) == 1)
 	{
-		interactive(argw, envy)
+		interactive(argw, envy);
 	}
 	else
 		batch(argw, envy);
