@@ -20,8 +20,9 @@ char *search_full_path(char *commande)
 
 	while (paths_token[j])
 	{
-		full_paths = (build_full_path(paths_token[j], commande));
+		full_paths = (build_full_path(paths_token[j], commande))
 		if (!full_paths)
+
 		{
 			free_arr(paths_token);
 			return (NULL);

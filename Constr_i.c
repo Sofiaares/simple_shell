@@ -8,12 +8,12 @@
  * @eline: A string representing the input from the user.
  */
 
-void our_cod(char **argss, __attribute__((unused)) char *eline)
+void our_cd(char **argss, __attribute__((unused)) char *eline)
 {
 	char *bxf = NULL;
-	size_t ysize = 0;
+	size_t size = 0;
 	int index;
-	char *pwd = getcwd(bxf, ysize);
+	char *pwd = getcwd(bxf, size);
 
 	if (argss[1] == NULL)
 	{
@@ -41,7 +41,7 @@ void our_cod(char **argss, __attribute__((unused)) char *eline)
 }
 
 /**
- * our_env - Prints every environmental variables in the current shell.
+ * our_env - Prints all the environmental variables in the current shell.
  * @m: the command and its flags , but not used here
  * @t: A string representing the input from the user. also not used.
  */
@@ -88,7 +88,7 @@ void our_exit(char **argss, char *eline)
 #include "shell.h"
 
 /**
- * our_setenv - Initializ new environment variable,
+ * our_setenv - Initialize a new environment variable,
  * or modify an existing one
  * @argss: the variables array
  * @eline: the input from the user
@@ -126,4 +126,3 @@ void our_unsetenv(char *argss[], __attribute__((unused)) char *eline)
 	else
 		perror("unsetenv() ");
 }
-

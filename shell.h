@@ -18,9 +18,9 @@
 extern char **environ;
 
 /**
- * struct built_in - Defines the builtins functions.
+ * struct built_in - Defines the built_in funcs.
  * @built: The name of the build in command.
- * @func: A pointer to the right builtin function.
+ * @func: A pointer to the right built_in funcs.
  */
 typedef struct built_in
 {
@@ -60,6 +60,7 @@ char *build_full_path(char *paths, char *commande);
 char *search_full_path(char *command);
 char **parse_path(int index, char *rts);
 
+
 /* alx functions */
 void set_env(char *na, char *valu);
 char *_strdup_(char *src1);
@@ -74,4 +75,5 @@ char *_strcpy_(char *det, char *src1);
 int _atoi(char *v);
 int _isdigit_(int y);
 int _isupper(int ch);
+
 #endif
